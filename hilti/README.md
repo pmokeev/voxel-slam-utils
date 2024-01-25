@@ -31,7 +31,7 @@ The purpose of each script will be explained below.
 
 ---
 
-`hilti/fast-lio/prepare_clouds.py` - converts FAST-LIO output clouds to timestamps naming
+#### `hilti/fast-lio/prepare_clouds.py` - converts FAST-LIO output clouds to timestamps naming
 ```bash
 fast_lio_output/
 ├── scans_0.pcd
@@ -45,7 +45,7 @@ fast_lio_converted/
 ...
 ```
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/fast-lio/prepare_clouds.py \
   --dataset_input PATH_TO_FAST_LIO_OUTPUT \
@@ -55,7 +55,7 @@ python3 hilti/fast-lio/prepare_clouds.py \
 
 ---
 
-`hilti/fast-lio/prepare_poses.py` - takes scan_states.txt as input and produces poses in
+#### `hilti/fast-lio/prepare_poses.py` - takes scan_states.txt as input and produces poses in
 ```bash
 r11 r12 r13 tx
 r21 r22 r23 ty
@@ -64,7 +64,7 @@ r31 r32 r33 tz
 ```
 format
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/fast-lio/prepare_poses.py \
   --scan_states PATH_TO_SCAN_STATES_FILE \
@@ -73,10 +73,10 @@ python3 hilti/fast-lio/prepare_poses.py \
 
 ---
 
-`hilti/get_missed_timestamps.py` - for some reasons Hilti datasets doesn't have ground truth poses
+#### `hilti/get_missed_timestamps.py` - for some reasons Hilti datasets doesn't have ground truth poses
 for several point clouds. This scripts prints timestamps for which there is no GT poses.
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/get_missed_timestamps.py \
   --dataset PATH_TO_POINT_CLOUDS \
@@ -85,10 +85,10 @@ python3 hilti/get_missed_timestamps.py \
 
 ---
 
-`hilti/prepare_clouds.py` - formats naming of point clouds and leaves only one character after
+#### `hilti/prepare_clouds.py` - formats naming of point clouds and leaves only one character after
 point in timestamp. Example: `123123.1234000.pcd -> 123123.1.pcd`
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/prepare_clouds.py \
   --dataset_input PATH_TO_HILTI_POINT_CLOUDS \
@@ -97,11 +97,11 @@ python3 hilti/prepare_clouds.py \
 
 ---
 
-`hilti/prepare_poses.py` - produces poses files using given .txt file from Hilti website.
+#### `hilti/prepare_poses.py` - produces poses files using given .txt file from Hilti website.
 As it said before, for several point clouds there is no GT poses. For these timestamps GT pose
 creates using the closest pose.
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/prepare_poses.py \
   --dataset PATH_TO_HILTI_POINT_CLOUDS \
@@ -111,9 +111,9 @@ python3 hilti/prepare_poses.py \
 
 ---
 
-`hilti/visualize.py` - visualizes point cloud using poses and IMU matrix, which could be provided in code.
+#### `hilti/visualize.py` - visualizes point cloud using poses and IMU matrix, which could be provided in code.
 
-How can I run it?
+##### How can I run it?
 ```bash
 python3 hilti/visualize.py \
   --dataset PATH_TO_HILTI_POINT_CLOUDS \

@@ -1,9 +1,9 @@
-import argparse
-import os
-from typing import Tuple, Dict
-
 import mrob
 import numpy as np
+
+import argparse
+import os
+from typing import Dict, Tuple
 
 
 def increase_timestamp(timestamp: str) -> str:
@@ -34,7 +34,7 @@ def get_pose(line: str) -> Tuple[str, np.ndarray]:
     T[:3, 3] = [x, y, z]
 
     timestamp = str(timestamp)
-    timestamp = timestamp[:timestamp.index(".") + 2]
+    timestamp = timestamp[: timestamp.index(".") + 2]
 
     return timestamp, T
 
@@ -44,7 +44,8 @@ def get_poses(poses_path: str) -> Dict[str, np.ndarray]:
     with open(poses_path) as file:
         lines = file.readlines()
         for line in lines:
-            if line == "": continue
+            if line == "":
+                continue
             timestamp, pose = get_pose(line)
             poses[timestamp] = pose
 
@@ -66,7 +67,8 @@ def get_closest_pose(poses: Dict[str, np.ndarray], timestamp: str) -> np.ndarray
         left_counter += 1
 
     closest_timestamp = left_timestamp
-    if right_counter < left_counter: closest_timestamp = right_timestamp
+    if right_counter < left_counter:
+        closest_timestamp = right_timestamp
 
     return closest_timestamp
 
@@ -89,7 +91,7 @@ if __name__ == "__main__":
 
     poses = get_poses(args.poses)
     for point_cloud_name in os.listdir(args.dataset):
-        point_cloud_name = point_cloud_name[:point_cloud_name.index(".") + 2]
+        point_cloud_name = point_cloud_name[: point_cloud_name.index(".") + 2]
 
         if point_cloud_name in poses.keys():
             pose = poses[point_cloud_name]
@@ -99,6 +101,5 @@ if __name__ == "__main__":
             print(f"Missed: {point_cloud_name} -> {closest_pose}")
 
         write_pose(
-            os.path.join(args.poses_save_path, str(point_cloud_name) + ".txt"),
-            pose,
+            os.path.join(args.poses_save_path, str(point_cloud_name) + ".txt"), pose
         )

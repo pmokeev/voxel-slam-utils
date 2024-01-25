@@ -15,7 +15,7 @@ def get_pose(line: str) -> Tuple[str, np.ndarray]:
     T[:3, 3] = [x, y, z]
 
     timestamp = str(timestamp)
-    timestamp = timestamp[:timestamp.index(".") + 2]
+    timestamp = timestamp[: timestamp.index(".") + 2]
 
     return timestamp, T
 
@@ -39,7 +39,4 @@ if __name__ == "__main__":
         lines = file.readlines()
         for line in lines:
             timestamp, pose = get_pose(line)
-            write_pose(
-                os.path.join(args.poses_save_path, f"{timestamp}.txt"),
-                pose,
-            )
+            write_pose(os.path.join(args.poses_save_path, f"{timestamp}.txt"), pose)

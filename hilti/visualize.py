@@ -1,10 +1,10 @@
+import mrob
+import numpy as np
+import open3d as o3d
+
 import argparse
 import os
-import sys
 import random
-import mrob, numpy as np
-
-import open3d as o3d
 
 
 def get_imu():
@@ -43,18 +43,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     point_cloud = o3d.geometry.PointCloud(o3d.utility.Vector3dVector())
-    point_clouds = get_sorted(args.dataset)[args.start:args.end]
+    point_clouds = get_sorted(args.dataset)[args.start : args.end]
     imu = get_imu()
     random.seed(42)
 
     for point_cloud_name in point_clouds:
-        pose_name = point_cloud_name[:point_cloud_name.index(".") + 2] + ".txt"
+        pose_name = point_cloud_name[: point_cloud_name.index(".") + 2] + ".txt"
         try:
-            pose = read_pose(
-                os.path.join(args.poses, pose_name)
-            ) @ imu
-        except:
-            print(f"{pose_name} is missing, using IMU")
+            pose = read_pose(os.path.join(args.poses, pose_name)) @ imu
+        except Exception as e:
+            print(f"{pose_name} is missing due to {e}, using IMU")
             pose = imu
 
         cloud = o3d.io.read_point_cloud(

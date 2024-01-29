@@ -17,14 +17,14 @@ poses/
 
 Structure of folder:
 ```bash
-hilti/fast-lio/
+hilti/fast_lio/
 ├── prepare_clouds.py
 └── prepare_poses.py
 ```
 
 --- 
 
-#### `hilti/fast-lio/prepare_clouds.py` - converts FAST-LIO output clouds to timestamps naming
+#### `hilti/fast_lio/prepare_clouds.py` - converts FAST-LIO output clouds to timestamps naming
 ```bash
 fast_lio_output/
 ├── scans_0.pcd
@@ -40,7 +40,7 @@ fast_lio_clouds_converted/
 
 ##### How can I run it?
 ```bash
-python3 hilti/fast-lio/prepare_clouds.py \
+python3 hilti/fast_lio/prepare_clouds.py \
   --dataset_input PATH_TO_FAST_LIO_OUTPUT \
   --dataset_output PATH_TO_SAVE_CONVERTED_CLOUDS \
   --scan_states PATH_TO_SCAN_STATE_TXT_FILE
@@ -48,7 +48,7 @@ python3 hilti/fast-lio/prepare_clouds.py \
 
 ---
 
-#### `hilti/fast-lio/prepare_poses.py` - converts FAST-LIO output poses to timestamps naming
+#### `hilti/fast_lio/prepare_poses.py` - converts FAST-LIO output poses to timestamps naming
 ```bash
 fast_lio_output/
 ├── scan_states.txt
@@ -61,7 +61,7 @@ fast_lio_poses/
 
 ##### How can I run it?
 ```bash
-python3 hilti/fast-lio/prepare_poses.py \
+python3 hilti/fast_lio/prepare_poses.py \
   --scan_states PATH_TO_SCAN_STATE_TXT_FILE \
   --poses_save_path PATH_TO_SAVE_CONVERTED_POSES
 ```

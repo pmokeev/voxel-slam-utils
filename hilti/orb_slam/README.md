@@ -12,13 +12,13 @@ poses\
 
 Structure of folder:
 ```bash
-orb-slam/
+orb_slam/
 └── prepare_poses.py
 ```
 
 --- 
 
-#### `orb-slam/prepare_poses.py` - converts ORB-SLAM output poses to timestamps naming
+#### `orb_slam/prepare_poses.py` - converts ORB-SLAM output poses to timestamps naming
 ```bash
 orb_slam_output/
 └── CameraTrajectory.txt
@@ -31,7 +31,7 @@ orb_slam_poses/
 
 ##### How can I run it?
 ```bash
-python3 orb-slam/prepare_poses.py \
+python3 orb_slam/prepare_poses.py \
   --poses PATH_TO_CAMERA_TRAJECTORY_FILE \
   --poses_save_path PATH_TO_SAVE_CONVERTED_POSES
 ```

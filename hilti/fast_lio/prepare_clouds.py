@@ -2,6 +2,8 @@ import argparse
 import os
 import shutil
 
+__all__ = []
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="PrepareFastLioClouds")
     parser.add_argument("--dataset_input", type=str, required=True)

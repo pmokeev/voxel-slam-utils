@@ -4,7 +4,7 @@ import argparse
 import os
 import random
 
-from hilti.utils.utils import get_lidar_to_imu, get_sorted, read_pose
+from hilti.utils import get_lidar_to_imu, get_sorted, read_pose
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="VisualizePoses")

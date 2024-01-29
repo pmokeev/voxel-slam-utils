@@ -18,9 +18,9 @@ poses/
 Structure of folder:
 ```bash
 hilti/
-├── fast-lio - Represents scripts to interfact with FAST-LIO artifacts
+├── fast_lio - Represents scripts to interfact with FAST-LIO artifacts
 ├── initial - Represents scripts to interfact with initial dataset artifacts
-├── orb-slam - Represents scripts to interfact with ORB-SLAM artifacts
+├── orb_slam - Represents scripts to interfact with ORB-SLAM artifacts
 ├── utils - Represents utility scripts to interfact with !!! 2022 DATASET !!!
 ├── visualize.py
 └── visualize_trajectories.py

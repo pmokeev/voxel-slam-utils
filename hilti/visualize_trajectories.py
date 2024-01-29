@@ -6,39 +6,38 @@ import argparse
 import os
 from typing import List
 
-from hilti.utils.utils import (
-    get_camera_to_lidar,
-    get_lidar_to_imu,
-    get_sorted,
-    read_pose,
-)
+from hilti.utils import (get_camera_to_lidar, get_lidar_to_imu, get_sorted,
+                         read_pose)
 
 
-def get_trajectory(path: str, color: List) -> List:
+def get_normalized_poses(path: str) -> List:
     lidar_to_imu = get_lidar_to_imu()
     camera_to_lidar = get_camera_to_lidar()
-    poses = get_sorted(path)
-    meshes = []
+    poses = [read_pose(os.path.join(path, pose_name)) for pose_name in get_sorted(path)]
 
-    zero_pose = read_pose(os.path.join(path, poses[0]))
+    if "orb" in path:
+        poses = [
+            np.linalg.inv(poses[0] @ lidar_to_imu @ camera_to_lidar)
+            @ pose
+            @ lidar_to_imu
+            @ camera_to_lidar
+            for pose in poses
+        ]
+    else:
+        poses = [
+            np.linalg.inv(poses[0] @ lidar_to_imu) @ pose @ lidar_to_imu
+            for pose in poses
+        ]
 
-    for pose_name in poses:
-        if "orb" in path:
-            pose = (
-                np.linalg.inv(zero_pose @ lidar_to_imu @ camera_to_lidar)
-                @ read_pose(os.path.join(path, pose_name))
-                @ lidar_to_imu
-                @ camera_to_lidar
-            )
-        else:
-            pose = (
-                np.linalg.inv(zero_pose @ lidar_to_imu)
-                @ read_pose(os.path.join(path, pose_name))
-                @ lidar_to_imu
-            )
-        mesh = o3d.geometry.TriangleMesh.create_coordinate_frame().transform(pose)
-        mesh.paint_uniform_color(color)
-        meshes.append(mesh)
+    return poses
+
+
+def get_trajectory(poses: List[np.ndarray], color: List) -> List:
+    meshes = [
+        o3d.geometry.TriangleMesh.create_coordinate_frame().transform(pose)
+        for pose in poses
+    ]
+    meshes = [mesh.paint_uniform_color(color) for mesh in meshes]
 
     return meshes
 
@@ -54,6 +53,8 @@ if __name__ == "__main__":
     trajectories = []
 
     for pose_path, color in zip(args.poses, args.colour):
-        trajectories.extend(get_trajectory(pose_path, Color(color).rgb))
+        trajectories.extend(
+            get_trajectory(get_normalized_poses(pose_path), Color(color).rgb)
+        )
 
     o3d.visualization.draw_geometries(trajectories)

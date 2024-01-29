@@ -6,8 +6,12 @@ import argparse
 import os
 from typing import List
 
-from hilti.utils.utils import (get_camera_to_lidar, get_lidar_to_imu,
-                               get_sorted, read_pose)
+from hilti.utils.utils import (
+    get_camera_to_lidar,
+    get_lidar_to_imu,
+    get_sorted,
+    read_pose,
+)
 
 
 def get_trajectory(path: str, color: List) -> List:

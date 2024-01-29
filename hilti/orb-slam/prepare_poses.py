@@ -5,6 +5,8 @@ import argparse
 import os
 from typing import Tuple
 
+from hilti.utils import write_pose
+
 
 def get_pose(line: str) -> Tuple[str, np.ndarray]:
     timestamp, x, y, z, tx, ty, tz, tw = list(map(float, line.split(" ")))
@@ -17,10 +19,6 @@ def get_pose(line: str) -> Tuple[str, np.ndarray]:
     timestamp = timestamp[: timestamp.index(".") + 2]
 
     return timestamp, T
-
-
-def write_pose(path: str, pose: np.ndarray):
-    np.savetxt(path, pose)
 
 
 if __name__ == "__main__":

@@ -46,6 +46,8 @@ python3 hilti/fast-lio/prepare_clouds.py \
   --scan_states PATH_TO_SCAN_STATE_TXT_FILE
 ```
 
+---
+
 #### `hilti/fast-lio/prepare_poses.py` - converts FAST-LIO output poses to timestamps naming
 ```bash
 fast_lio_output/

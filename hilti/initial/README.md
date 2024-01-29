@@ -25,8 +25,7 @@ hilti/initial/
 
 ---
 
-#### `hilti/initial/get_missed_timestamps.py` - for some reasons Hilti datasets doesn't have ground truth poses
-for several point clouds. This scripts prints timestamps for which there is no GT poses.
+#### `hilti/initial/get_missed_timestamps.py` - for some reasons Hilti datasets doesn't have ground truth poses for several point clouds. This scripts prints timestamps for which there is no GT poses.
 ```bash
 initial_output/
 └── poses.txt
@@ -89,5 +88,3 @@ python3 hilti/initial/prepare_poses.py \
   --poses PATH_TO_POSES_TXT_FILE \
   --poses_save_path PATH_TO_POSES_TO_SAVE
 ```
-
----

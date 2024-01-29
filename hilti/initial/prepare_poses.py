@@ -5,6 +5,8 @@ import argparse
 import os
 from typing import Dict, Tuple
 
+from hilti.utils.utils import write_pose
+
 
 def increase_timestamp(timestamp: str) -> str:
     last_digit = int(timestamp[-1])
@@ -71,15 +73,6 @@ def get_closest_pose(poses: Dict[str, np.ndarray], timestamp: str) -> np.ndarray
         closest_timestamp = right_timestamp
 
     return closest_timestamp
-
-
-def write_pose(path: str, pose: np.ndarray):
-    with open(path, "w+") as file:
-        for ind, pose_line in enumerate(pose):
-            file.write(" ".join(str(x) for x in pose_line))
-
-            if ind != pose.shape[0]:
-                file.write("\n")
 
 
 if __name__ == "__main__":

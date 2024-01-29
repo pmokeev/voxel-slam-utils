@@ -5,6 +5,8 @@ import mrob
 
 import numpy as np
 
+from hilti.utils.utils import write_pose
+
 
 def get_pose(line: str) -> Tuple[str, np.ndarray]:
     timestamp, x, y, z, tx, ty, tz, tw = list(map(float, line.split(" ")[:8]))
@@ -18,15 +20,6 @@ def get_pose(line: str) -> Tuple[str, np.ndarray]:
     timestamp = timestamp[: timestamp.index(".") + 2]
 
     return timestamp, T
-
-
-def write_pose(path: str, pose: np.ndarray):
-    with open(path, "w+") as file:
-        for ind, pose_line in enumerate(pose):
-            file.write(" ".join(str(x) for x in pose_line))
-
-            if ind != pose.shape[0]:
-                file.write("\n")
 
 
 if __name__ == "__main__":
